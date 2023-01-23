@@ -15,11 +15,11 @@
 
 {{-- for validation --}}
 @if($errors)
-    @foreach($errors->all() as $errors)
-        <li class="text-danger">
-            {{$errors}}
-        </li>
-    @endforeach
+@foreach($errors->all() as $errors)
+<li class="text-danger">
+    {{$errors}}
+</li>
+@endforeach
 @endif
 
 {{-- Create Section --}}
@@ -38,7 +38,7 @@
             <label for="status" class="form-label">Status</label>
             <select name="status" id="status" class="form-control">
                 @foreach ($statuses as $status)
-                    <option value="{{ $status['value'] }}">{{ $status['label'] }}</option>
+                <option value="{{ $status['value'] }}">{{ $status['label'] }}</option>
                 @endforeach
             </select>
         </div>
@@ -46,7 +46,7 @@
         <a href="{{ route('ticket.index') }}" class="btn btn-secondary mr-2">
             <i class="fa fa-arrow-left"></i> Cancel</a>
         @auth
-            <input type="hidden" name="user_name" value="{{Auth::User()->name}}" />
+        <input type="hidden" name="user_name" value="{{Auth::User()->name}}" />
         @endauth
         <button type="submit" class="btn btn-success">
             <i class="fa fa-check"></i>Submit</button>

@@ -29,9 +29,9 @@
         <div class="card-text">
             <div class="float-start">
                 @if($row['status'] === "In Progress")
-                    {{$row['description']}}
+                {{$row['description']}}
                 @else
-                    <del>{{$row['description']}}</del>
+                <del>{{$row['description']}}</del>
                 @endif
 
                 <br>
@@ -90,24 +90,26 @@
                             <hr class="my-0" />
                             <br>
                             @foreach ($ticket as $row)
-                                @for ($id=count($row['comm'])-1; $id>=0;$id--)
-                                    <div class="d-flex flex-start">
-                                        <img class="rounded-circle shadow-1-strong me-3" src="https://t4.ftcdn.net/jpg/01/23/09/33/360_F_123093367_c7WoJ0uHCkepbgLasnGFBKK8sSNiJw6l.jpg" alt="avatar" width="60" height="60" />
-                                        <div>
-                                            <h6 class="fw-bold mb-1">{{ $row['comm'][$id]['username']}}</h6>
-                                            <div class="d-flex align-items-center mb-3">
-                                                <p class="mb-0">
-                                                    {{ date('d.M.Y, H:m',strtotime($row['comm'][$id]['created_at']) )}}
-                                                 </p>
-                                            </div>
-                                            <p class="mb-0">
-                                                {{$row['comm'][$id]['comment']}}
-                                            </p>
-                                        </div>
-                                        <br>
-                                        <hr class="my-0" style="height: 1px;" />
+                            @for ($id=count($row['comm'])-1; $id>=0;$id--)
+                            <div class="d-flex flex-start">
+                                <img class="rounded-circle shadow-1-strong me-3"
+                                    src="https://t4.ftcdn.net/jpg/01/23/09/33/360_F_123093367_c7WoJ0uHCkepbgLasnGFBKK8sSNiJw6l.jpg"
+                                    alt="avatar" width="60" height="60" />
+                                <div>
+                                    <h6 class="fw-bold mb-1">{{ $row['comm'][$id]['username']}}</h6>
+                                    <div class="d-flex align-items-center mb-3">
+                                        <p class="mb-0">
+                                            {{ date('d.M.Y, H:m',strtotime($row['comm'][$id]['created_at']) )}}
+                                        </p>
                                     </div>
-                                @endfor
+                                    <p class="mb-0">
+                                        {{$row['comm'][$id]['comment']}}
+                                    </p>
+                                </div>
+                                <br>
+                                <hr class="my-0" style="height: 1px;" />
+                            </div>
+                            @endfor
                             @endforeach
                         </div>
                         <hr class="my-0" style="height: 1px;" />
