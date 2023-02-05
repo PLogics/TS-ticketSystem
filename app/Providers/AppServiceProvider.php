@@ -8,7 +8,21 @@ use App\Models\Ticket;
 
 class AppServiceProvider extends ServiceProvider
 {
-    // Bootstrap any application services.
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
     public function boot()
     {
         Ticket::observe(TicketObserver::class);

@@ -16,7 +16,7 @@ class Ticket extends Model
     }
 
     // relation between Comment and Ticket table to fetch data //
-    public function comments()
+    public function comm()
     {
         return $this->hasMany(Comment::class);
     }
