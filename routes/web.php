@@ -6,17 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IController;
 use App\Http\Controllers\TicketController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 // Route for login page // 
 Route::get('/', function () {
     return redirect('/index');
@@ -26,7 +15,7 @@ Route::get('/', function () {
 Route::get('/index', [TicketController::class, 'index'])->name('index');
 
 // add comment //
-Route::post('/addcomment', [IController::class, 'add_comment'])->middleware(['auth', 'verified'])->name('add_comment');
+Route::post('/addcomment', [CommentController::class, 'add_comment'])->middleware(['auth', 'verified'])->name('add_comment');
 
 // isAdmin Middleware can access //
 Route::middleware('isAdmin')->group(function () {
@@ -39,8 +28,8 @@ Route::middleware('isAdmin')->group(function () {
 });
 
 // Route for Users //
-Route::get('userindex', [IController::class, 'userindex']);
-Route::get('usershow/{id}', [IController::class, 'usershow']);
+Route::get('userindex', [Controller::class, 'userindex']);
+Route::get('usershow/{id}', [Controller::class, 'usershow']);
 
 // Route for profile update //
 Route::middleware('auth')->group(function () {
