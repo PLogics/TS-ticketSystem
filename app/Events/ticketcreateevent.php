@@ -14,7 +14,7 @@ class ticketcreateevent
 {
     // this is the event for ticketcreate with variable $data //
     public $data;
-    
+
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
@@ -24,7 +24,7 @@ class ticketcreateevent
      */
     public function __construct($data)
     {
-        $this->data=$data;
+        $this->data = $data;
     }
 
     /**
