@@ -30,51 +30,50 @@
                         <a class="nav-link" href="{{ route('ticket.create') }}">New Ticket</a>
                     </li>
                     <li class="nav-item">
-                        <!-- <a class="nav-link" href="#">Pricing</a> -->
                     </li>
                 </ul>
             </div>
 
-            {{-- <div class="collapse navbar-collapse float-md-right" id="navbarNavDropdown"> --}}
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <button
-                            class="bg-dark nav-link dropdown-toggle px-5 py-2 border border-transparent text-sm text-white"
-                            href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <div>{{ Auth::user()->name }}</div>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        
-                            <x-dropdown-link :href="route('profile.edit')">
-                                {{ __('Profile') }}
-                            </x-dropdown-link>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <button
+                        class="bg-dark nav-link dropdown-toggle px-5 py-2 border border-transparent text-sm text-white"
+                        href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        <div>{{ Auth::user()->name }}</div>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
                                                     this.closest('form').submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </form>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
     <!-- Body for flash messages-->
     <div class="container p-5">
         <div id="app">
             @include('flash-message')
-    
+
             @yield('content')
             @yield('main-content')
         </div>
     </div>
-    
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

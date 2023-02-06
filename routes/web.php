@@ -3,8 +3,9 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\IController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TicketController;
+
 
 // Route for login page // 
 Route::get('/', function () {

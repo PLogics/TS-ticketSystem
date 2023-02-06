@@ -15,7 +15,7 @@ class Comment extends Model
         return $this->belongsTo(ticket::class);
     }
 
-    // relation between Comment and User table to fetch data through  //
+     // relation between Comment and User table to fetch data through  //
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -6,27 +6,32 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Http\Request;
+use App\Interfaces\UserInterface;
 use App\Models\Ticket;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    private $userInterface;
+
+    public function __construct(UserInterface $userInterface)
+    {
+        $this->userInterface = $userInterface;
+    }
+
+
     // home page for users //
     public function userindex()
     {
-        $tickets = Ticket::orderBy('id', 'desc')->get();
-        // dd($tickets);
+        $tickets = $this->userInterface->getAllTickets();
         return vieW('userindex', compact('tickets'));
     }
 
     // deatil view function for users //
     public function usershow($id)
     {
-        $ticket = Ticket::where('id', $id)->with('comm')->get();
-        $tickets = $ticket->toArray();
-        // dd($tickets);
+        $ticket = $this->userInterface->getTicketByID($id);
         return view('usershow', compact('ticket'));
     }
 }

@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register Form</title>
+    <title>Login Form</title>
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
@@ -26,7 +26,8 @@
 </head>
 
 <body>
-    <section class="vh-100 bg-image" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+    <section class="vh-100 bg-image"
+        style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
         <div class="mask d-flex align-items-center h-100 gradient-custom-3">
             <div class="container h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
@@ -40,28 +41,35 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3cg">Your Email</label>
-                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg border border-black" name="email" placeholder="email@gmail.com" />
+                                        <input type="email" id="form3Example3cg"
+                                            class="form-control form-control-lg border border-black" name="email"
+                                            placeholder="email@gmail.com" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cg">Password</label>
-                                        <input type="password" id="form3Example4cg" class="form-control form-control-lg border border-black" name="password" />
+                                        <input type="password" id="form3Example4cg"
+                                            class="form-control form-control-lg border border-black" name="password" />
                                     </div>
 
                                     <div class="d-flex justify-content-center">
-                                        <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Sign In</button>
+                                        <button type="submit"
+                                            class="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Sign
+                                            In</button>
                                     </div>
 
                                     <p class="text-center text-muted mt-5 mb-0">Dont have an account?
-                                        <a href="{{ route('register') }}"><button type="button" class="btn btn-success gradient-custom-4 text-body" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                                        <a href="{{ route('register') }}"><button type="button"
+                                                class="btn btn-success gradient-custom-4 text-body"
+                                                data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                                                 Register
                                             </button></a>
                                     </p>
                                     @if (Route::has('password.request'))
-                                    <p class="text-center text-muted mt-5 mb-0">
-                                        <a href="{{ route('password.request') }}">Forgot your password?
-                                        </a>
-                                    </p>
+                                        <p class="text-center text-muted mt-5 mb-0">
+                                            <a href="{{ route('password.request') }}">Forgot your password?
+                                            </a>
+                                        </p>
                                     @endif
                                 </form>
                             </div>
@@ -71,8 +79,6 @@
             </div>
         </div>
     </section>
-
-
 
 </body>
 

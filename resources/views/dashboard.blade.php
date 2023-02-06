@@ -1,8 +1,6 @@
 @include('layout')
 <x-app-layout>
     <x-slot>
-        {{-- <div class="font-semibold text-l text-gray-800 leading-tight">
-        </div> --}}
     </x-slot>
 
     <div class="py-12">

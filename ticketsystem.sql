@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 24, 2023 at 05:09 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Host: localhost
+-- Generation Time: Jan 17, 2023 at 01:05 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comments` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `ticket_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -45,8 +45,10 @@ INSERT INTO `comments` (`id`, `comment`, `username`, `ticket_id`, `created_at`, 
 (3, 'what is an issue?', 'Ishant', 5, '2023-01-16 10:00:51', '2023-01-16 10:00:51'),
 (5, 'hellooo', 'Ishant', 4, '2023-01-16 11:46:28', '2023-01-16 11:46:28'),
 (6, 'keep it', 'Palak', 14, '2023-01-16 12:14:57', '2023-01-16 12:14:57'),
+(8, 'hiii', 'Palak', 27, '2023-01-17 04:48:43', '2023-01-17 04:48:43'),
 (12, 'Check details', 'Gagan', 25, '2023-01-17 06:30:40', '2023-01-17 06:30:40'),
-(26, 'Send me emails', 'Palak', 24, '2023-01-23 09:47:28', '2023-01-23 09:47:28');
+(19, 'hiii', 'Palak', 28, '2023-01-17 11:06:02', '2023-01-17 11:06:02'),
+(20, 'Issue please', 'Ishant', 28, '2023-01-17 11:06:43', '2023-01-17 11:06:43');
 
 -- --------------------------------------------------------
 
@@ -56,11 +58,11 @@ INSERT INTO `comments` (`id`, `comment`, `username`, `ticket_id`, `created_at`, 
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -82,8 +84,8 @@ INSERT INTO `failed_jobs` (`id`, `uuid`, `connection`, `queue`, `payload`, `exce
 
 CREATE TABLE `jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` varchar(255) NOT NULL,
+  `payload` longtext NOT NULL,
   `attempts` tinyint(3) UNSIGNED NOT NULL,
   `reserved_at` int(10) UNSIGNED DEFAULT NULL,
   `available_at` int(10) UNSIGNED NOT NULL,
@@ -98,7 +100,7 @@ CREATE TABLE `jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -122,8 +124,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -135,11 +137,11 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -154,10 +156,10 @@ CREATE TABLE `personal_access_tokens` (
 
 CREATE TABLE `tickets` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('In Progress','Completed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'In Progress',
-  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `status` enum('In Progress','Completed') NOT NULL DEFAULT 'In Progress',
+  `username` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -178,7 +180,9 @@ INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `username`, `crea
 (23, 'Project Discussion', 'At 9:50 with proper documentation', 'In Progress', 'Palak', '2023-01-17 03:26:22', '2023-01-17 03:26:22'),
 (24, 'Review Meet', 'Please let me know your current work report', 'In Progress', 'Palak', '2023-01-17 03:36:00', '2023-01-17 03:36:00'),
 (25, 'Schedule time', 'Current time table', 'In Progress', 'Palak', '2023-01-17 03:38:08', '2023-01-17 03:38:08'),
-(26, 'Final Work Report', 'Proper Documentation is required', 'In Progress', 'Palak', '2023-01-17 03:55:34', '2023-01-17 03:55:34');
+(26, 'Final Work Report', 'Proper Documentation is required', 'In Progress', 'Palak', '2023-01-17 03:55:34', '2023-01-17 03:55:34'),
+(27, 'Testing', 'ABC', 'In Progress', 'Palak', '2023-01-17 03:58:45', '2023-01-17 03:58:45'),
+(28, 'Final tets', 'iiii', 'Completed', 'Palak', '2023-01-17 04:03:35', '2023-01-17 04:35:34');
 
 -- --------------------------------------------------------
 
@@ -188,12 +192,12 @@ INSERT INTO `tickets` (`id`, `title`, `description`, `status`, `username`, `crea
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `role` varchar(255) NOT NULL DEFAULT '0',
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -276,7 +280,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

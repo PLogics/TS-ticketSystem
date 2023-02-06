@@ -9,17 +9,6 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
@@ -42,7 +31,7 @@ class LoginController extends Controller
 
     public function showAdminLoginForm()
     {
-        return view('auth.login', ['url' => route('admin.login-view'), 'title'=>'Admin']);
+        return view('auth.login', ['url' => route('admin.login-view'), 'title' => 'Admin']);
     }
 
     public function adminLogin(Request $request)
@@ -52,7 +41,7 @@ class LoginController extends Controller
             'password' => 'required|min:6'
         ]);
 
-        if (\Auth::guard('admin')->attempt($request->only(['email','password']), $request->get('remember'))){
+        if (\Auth::guard('admin')->attempt($request->only(['email', 'password']), $request->get('remember'))) {
             return redirect()->intended('/admin/dashboard');
         }
 

@@ -15,21 +15,13 @@ class ticketcreateemail extends Mailable
 
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
+    // Create a new message instance.
     public function __construct($data)
     {
-        $this->data=$data;
+        $this->data = $data;
     }
 
-    /**
-     * Get the message envelope.
-     *
-     * @return \Illuminate\Mail\Mailables\Envelope
-     */
+    // Get the message envelope.
     public function envelope()
     {
         return new Envelope(
@@ -37,26 +29,18 @@ class ticketcreateemail extends Mailable
         );
     }
 
-    /**
-     * Get the message content definition.
-     *
-     * @return \Illuminate\Mail\Mailables\Content
-     */
+    // Get the message content definition.
     public function content()
     {
         return new Content(
             markdown: 'mailview',
-            with:[
-                'data'=>$this->data,
+            with: [
+                'data' => $this->data,
             ]
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array
-     */
+    // Get the attachments for the message.
     public function attachments()
     {
         return [];

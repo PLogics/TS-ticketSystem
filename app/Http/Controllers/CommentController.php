@@ -3,26 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Events\ticketcreateevent;
-use App\Models\Comment;
+use App\Interfaces\CommentInterface;
 
 class CommentController extends Controller
 {
+    private $commentInterface;
+
+    public function __construct(CommentInterface $commentInterface)
+    {
+        $this->commentInterface = $commentInterface;
+    }
+
     //add comment//
     public function add_comment(Request $request)
     {
+        //validate data
         $request->validate([
             'comment' => 'required',
         ]);
 
-        $add = new Comment;
-        if ($request->isMethod('post')) {
-            $add->comment = $request->get('comment');
-            $add->username = $request->get('user_name');
-            $add->ticket_id = $request->get('ticket_id');
+        $record = [
+            'comment' => $request->comment,
+            'username' => $request->get('user_name'),
+            'ticket_id' => $request->get('ticket_id'),
+        ];
 
-            $add->save();
-        }
-        return back()->with('success', 'Comment created successfully!');;
+        $comment = $this->commentInterface->storeComment($record);
+        return back()->with('success', 'Comment created successfully!');
     }
 }

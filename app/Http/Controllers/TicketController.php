@@ -1,146 +1,91 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
 use Illuminate\Http\Request;
-use App\Events\ticketcreateevent;
+use App\Interfaces\TicketInterface;
 
 class TicketController extends Controller
 {
+    private $ticketInterface;
+
+    public function __construct(TicketInterface $ticketInterface)
+    {
+        $this->ticketInterface = $ticketInterface;
+    }
+
     public $data;
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    // Display a listing of all tickets
     public function index()
     {
-        $tickets = Ticket::orderBy('id', 'desc')->get();
-        // dd($tickets);
+        $tickets = $this->ticketInterface->getAllTickets();
         return view('index', compact('tickets'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    // Show the form for creating a new ticket
     public function create()
     {
-        $statuses = [
-            [
-                'label' => 'In Progress',
-                'value' => 'In Progress',
-            ],
-            [
-                'label' => 'Completed',
-                'value' => 'Completed',
-            ]
-        ];
+        $statuses = $this->ticketInterface->createTicket();
         return view('create', compact('statuses'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Store a newly created ticket
     public function store(Request $request)
     {
-        // try {
+        // validate data //
         $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        $ticket = new ticket();
-        if ($request->isMethod('post')) {
-            $ticket->title = $request->title;
-            $ticket->description = $request->description;
-            $ticket->status = $request->status;
-            $ticket->username = $request->get('user_name');
-            $ticket->save();
-            $data = ['username' => 'palak', 'email' => 'palakpalak684@gmail.com'];
-            event(new ticketcreateevent($data));
-        }
+        $record = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'username' => $request->get('user_name'),
+        ];
+        $ticket = $this->ticketInterface->storeTicket($record);
         return redirect('index')->with('success', 'Ticket created successfully!');
-        // } catch (Exception $e) {
-        //     return back()->with('error', $e->getMessage('Something is wrong!!'));
-        // }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Display the specified ticket
     public function show($id)
     {
-        $tickets = Ticket::where('id', $id)->with('comm')->get();
-        $ticket = $tickets->toArray();
-        // dd($ticket);
+        $ticket = $this->ticketInterface->getTicketByID($id);
         return view('show', compact('ticket'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Edit the specified ticket
     public function edit($id)
     {
-        $ticket = Ticket::findorFail($id);
-        $statuses = [
-            [
-                'label' => 'In Progress',
-                'value' => 'In Progress',
-            ],
-            [
-                'label' => 'Completed',
-                'value' => 'Completed',
-            ]
-        ];
-        return view('edit', compact('ticket', 'statuses'));
+        $ticket = $this->ticketInterface->getTicketByID($id);
+        return view('edit', compact('ticket'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    //  Update the specified ticket in storage.
     public function update(Request $request, $id)
     {
-        $ticket = Ticket::findorFail($id);
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'status' => 'required',
         ]);
 
-        $ticket->title = $request->title;
-        $ticket->description = $request->description;
-        $ticket->status = $request->status;
-        $ticket->save();
+        $record = [
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
+            'username' => $request->get('user_name'),
+        ];
+        $ticket = $this->ticketInterface->updateTicket($record, $id);
         return redirect()->route('index')->with('success', 'Ticket updated successfully!');
     }
 
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    // Remove the specified ticket
     public function destroy($id)
     {
-        $ticket = Ticket::findorFail($id);
-        $ticket->delete();
+        $ticket = $this->ticketInterface->deleteTicket($id);
         return redirect()->route('index')->with('danger', 'Ticket deleted successfully!');
     }
 }

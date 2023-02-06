@@ -40,26 +40,27 @@
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1cg">Your Name</label>
-                                        <input type="text" id="form3Example1cg" class="form-control form-control-lg border border-black"
-                                            name="user" />
+                                        <input type="text" id="form3Example1cg"
+                                            class="form-control form-control-lg border border-black" name="user" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3cg">Your Email</label>
-                                        <input type="email" id="form3Example3cg" class="form-control form-control-lg border border-black" 
-                                        placeholder="email@gmail.com" name="email" />
+                                        <input type="email" id="form3Example3cg"
+                                            class="form-control form-control-lg border border-black"
+                                            placeholder="email@gmail.com" name="email" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example3cg">Your Role</label>
-                                        <input type="text" id="form3Example3cg" class="form-control form-control-lg border border-black"
-                                            name="role" />
+                                        <input type="text" id="form3Example3cg"
+                                            class="form-control form-control-lg border border-black" name="role" />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example4cg">Password</label>
-                                        <input type="password" id="form3Example4cg" class="form-control form-control-lg border border-black"
-                                            name="password" />
+                                        <input type="password" id="form3Example4cg"
+                                            class="form-control form-control-lg border border-black" name="password" />
                                     </div>
 
                                     <div class="d-flex justify-content-center">
